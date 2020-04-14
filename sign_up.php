@@ -97,12 +97,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       </a>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a href="index.php" class="nav-link">HOME</a>
-          </li>
-          <li class="nav-item">
-            <a href="sign_in.php" class="nav-link">ログイン</a>
-          </li>
+          <?php if ($_SESSION['id']) : ?>
+            <li class="nav-item">
+              <a href="index.php" class="nav-link">HOME</a>
+            <li class="nav-item">
+              <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+          <?php else : ?>
+            <li class="nav-item">
+              <a href="index.php" class="nav-link">HOME</a>
+            <li class="nav-item">
+              <a href="sign_in.php" class="nav-link">ログイン</a>
+            </li>
+            <li class="nav-item">
+              <a href="sign_up.php" class="nav-link">アカウント登録</a>
+            </li>
+          <?php endif; ?>
         </ul>
       </div>
     </nav>
@@ -111,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
           <div class="card card-signin my-5 bg-light">
             <div class="card-body">
-              <h5 class="card-title text-center">アカウント登録</h5>
+              <h5 class="card-title text-center">Sign Up</h5>
               <?php if ($errors) : ?>
                 <ul class="alert alert-danger">
                   <?php foreach ($errors as $error) : ?>

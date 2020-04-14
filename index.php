@@ -3,6 +3,7 @@
 require_once('config.php');
 require_once('functions.php');
 
+session_start();
 
 ?>
 
@@ -33,15 +34,22 @@ require_once('functions.php');
       </a>
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-          <li class="nav-item">
-            <a href="index.php" class="nav-link">HOME</a>
-          </li>
-          <li class="nav-item">
-            <a href="sign_in.php" class="nav-link">ログイン</a>
-          </li>
-          <li class="nav-item">
-            <a href="sign_up.php" class="nav-link">アカウント登録</a>
-          </li>
+          <?php if ($_SESSION['id']) : ?>
+            <li class="nav-item">
+              <a href="index.php" class="nav-link">HOME</a>
+            <li class="nav-item">
+              <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+          <?php else : ?>
+            <li class="nav-item">
+              <a href="index.php" class="nav-link">HOME</a>
+            <li class="nav-item">
+              <a href="sign_in.php" class="nav-link">ログイン</a>
+            </li>
+            <li class="nav-item">
+              <a href="sign_up.php" class="nav-link">アカウント登録</a>
+            </li>
+          <?php endif; ?>
         </ul>
       </div>
     </nav>
