@@ -53,6 +53,14 @@ session_start();
         </ul>
       </div>
     </nav>
+    <div class="slide" id="makeImg">
+        <img src="images/ハーレイクイン2.jpg" alt="ハーレイ・クインの華麗なる覚醒 BIRDS OF PREY">
+        <img src="images/一度死んでみた.jpg" alt="一度死んでみた">
+        <img src="images/パラサイト.jpg" alt="パラサイト 半地下の家族">
+        <img src="images/仮面病棟.jpg" alt="仮面病棟">
+        <img src="images/ミッドサマー.jpg" alt="ミッドサマー">
+    </div>
+    <h2 class="text-center">上映中の作品</h2>
 
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
