@@ -54,14 +54,32 @@ session_start();
       </div>
     </nav>
     <div class="slide" id="makeImg">
-        <img src="images/ハーレイクイン2.jpg" alt="ハーレイ・クインの華麗なる覚醒 BIRDS OF PREY">
-        <img src="images/一度死んでみた.jpg" alt="一度死んでみた">
-        <img src="images/パラサイト.jpg" alt="パラサイト 半地下の家族">
-        <img src="images/仮面病棟.jpg" alt="仮面病棟">
-        <img src="images/ミッドサマー.jpg" alt="ミッドサマー">
+      <img src="images/ハーレイクイン2.jpg" alt="ハーレイ・クインの華麗なる覚醒 BIRDS OF PREY">
+      <img src="images/一度死んでみた.jpg" alt="一度死んでみた">
+      <img src="images/パラサイト.jpg" alt="パラサイト 半地下の家族">
+      <img src="images/仮面病棟.jpg" alt="仮面病棟">
+      <img src="images/ミッドサマー.jpg" alt="ミッドサマー">
+      <img src="images/fukushima50.jpg" alt="Fukushima50">
+      <img src="images/akira imax.jpg" alt="AKIRA_IMAX">
     </div>
-    <h2 class="text-center">上映中の作品</h2>
-
+    <h2 class="movies text-center">上映中の作品</h2>
+    <div class="container">
+      <div class="item">
+        <a href="movie1.php">
+          <div class="item_jacket">
+            <img src="images/ハーレイクイン.jpg" alt="ハーレイ・クインの華麗なる覚醒 BIRDS OF PREY" width="250" height="300">
+          </div>
+          <h5 calss="item_title">ハーレイ・クインの華麗なる覚醒 BIRDS OF PREY</h5>
+        </a>
+      </div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>
