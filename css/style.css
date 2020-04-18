@@ -19,3 +19,66 @@
 .alert-danger > li {
   list-style-type: none;
 }
+
+ /*=== 画像の表示エリア ================================= */
+.slide {
+  position   : relative;
+  overflow   : hidden;
+  width      : 900px;
+  height     : 500px;
+  margin: auto;      /* サンプルは中央寄せの背景：白 */
+  background : #fff;
+}
+
+ /*=== 画像の設定 ======================================= */
+.slide img {
+  display    : block;
+  position   : absolute;
+                      /* 画像のサイズを表示エリアに合せる */
+  width      : inherit;
+  height     : inherit;
+  left       : 100%;
+  animation  : slideAnime 22s ease infinite;
+}
+
+ /*=== スライドのアニメーションを段差で開始する ========= */
+.slide img:nth-of-type(1) { animation-delay: 0s }
+.slide img:nth-of-type(2) { animation-delay: 3s }
+.slide img:nth-of-type(3) { animation-delay: 6s }
+.slide img:nth-of-type(4) { animation-delay: 9s }
+.slide img:nth-of-type(5) { animation-delay: 12s }
+.slide img:nth-of-type(6) { animation-delay: 15s }
+.slide img:nth-of-type(7) { animation-delay: 18s }
+
+ /*=== スライドのアニメーション ========================= */
+@keyframes slideAnime{
+  0% { left: 100%  }
+  2% { left: 0     }
+  18% { left: 0     }
+  20% { left: -100% }
+  100% { left: -100% }
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  padding: 0 0 0 25px;
+  margin-top: 25px;
+}
+
+.item a {
+  text-decoration: none;
+}
+
+.movies {
+  margin: 30px;
+}
+
+.item_title {
+  margin-top: 15px;
+  font-size: 1.0rem;
+  color: black;
+}
