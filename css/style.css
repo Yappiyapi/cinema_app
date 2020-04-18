@@ -59,11 +59,26 @@
   100% { left: -100% }
 }
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  padding: 0 0 0 25px;
+  margin-top: 25px;
+}
+
+.item a {
+  text-decoration: none;
+}
+
 .movies {
   margin: 30px;
 }
 
 .item_title {
-  font-size: 20px;
+  margin-top: 15px;
+  font-size: 1.0rem;
   color: black;
 }
