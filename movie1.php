@@ -71,10 +71,28 @@ session_start();
         配給：ワーナー・ブラザース映画
       </p>
       <a class="icon" href="http://wwws.warnerbros.co.jp/harleyquinn-movie/">オフィシャルサイト</a>
-      <br>
-      <h2 class="title-square">Cast・Staff</h2>
     </div>
-
+    <div class="movie-staff">
+      <h2 class="title-square">Cast・Staff</h2>
+      <span class="staff">監督</span>
+      <br>
+      <p class="director">キャシー・ヤン</p>
+      <br>
+      <span class="staff">キャスト</span>
+      <br>
+      <p class="cast">マーゴット・ロビー</p>
+      <p class="cast">メアリー・エリザベス・ウィンステッド</p>
+      <p class="cast">ユアン・マクレガー</p>
+      <p class="cast">ボヤナ・ノヴァコヴィッチ</p>
+      <p class="cast">ジャニー・スモレット・ベル</p>
+      <p class="cast">クリス・メッシーナ</p>
+      <p class="cast">アリ・ウォン ...</p>
+    </div>
+    <div class="coment">
+      <div class="Review">
+        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
+      </div>
+    </div>
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>

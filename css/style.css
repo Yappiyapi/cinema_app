@@ -20,6 +20,21 @@
   list-style-type: none;
 }
 
+.login-btn {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 10px 45px;
+  margin: 35px 0;
+  font-weight: 400;
+  transition: all 0.3s;
+}
+
+.login-btn:hover {
+  background-color: black;
+  color: white;
+}
+
  /*=== 画像の表示エリア ================================= */
 .slide {
   position   : relative;
@@ -58,12 +73,12 @@
   20% { left: -100% }
   100% { left: -100% }
 }
-
+/*ホーム映画画像部分*/
 .container {
   display: flex;
   flex-wrap: wrap;
 }
-
+/*ホーム映画タイトル部分*/
 .item {
   padding: 0 0 0 25px;
   margin-top: 25px;
@@ -82,13 +97,13 @@
   font-size: 1.0rem;
   color: black;
 }
-
+/*予告編動画*/
 .hoge {
   display: block;
   margin: auto;
   margin-top: 16px;
 }
-
+/*movie1.php部分*/
 .movie-title1 {
   margin: 0 120px 0 0;
   font-size: 1.8rem;
@@ -100,7 +115,7 @@
   text-align: center;
   margin: 15px 610px 0 0;
 }
-
+/*movie.php系全てのレイアウト*/
 .movie-container {
   display: flex;
   flex-wrap: wrap;
@@ -111,8 +126,10 @@
 
 .title-square {
   font-size: 1.3rem;
-  margin: 30px 0 0 200px;
+  margin: 30px 0 15px 200px;
+  padding-left: 5px;
   font-weight: 300;
+  border-left: 4px solid red;
 }
 
 .explanation {
@@ -141,3 +158,29 @@
   text-decoration: none;
   margin: 0 0 0 205px;
 }
+
+.staff {
+  margin: 208px;
+  padding-left: 5px;
+  border-left: 4px solid gray;
+}
+
+.movie-staff p.director {
+  margin-top: 10px;
+  margin-left: 210px;
+  padding-left: 5px;
+}
+
+.movie-staff p.cast {
+  margin-top: 10px;
+  margin-left: 215px;
+}
+
+.Review h2{
+  display: inline-block;
+  font-size: 1.7rem;
+  line-height: 2;
+  margin-left: 120px;
+  border: 3px solid gray;
+}
+
