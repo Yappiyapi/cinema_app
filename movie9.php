@@ -37,12 +37,17 @@ session_start();
           <?php if ($_SESSION['id']) : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+            <li class="nav-item">
+              <a href="new.php" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_in.php" class="nav-link">ログイン</a>
             </li>
@@ -53,7 +58,48 @@ session_start();
         </ul>
       </div>
     </nav>
-
+    <h2 class="movie-title">
+      <span>PSYCHO-PASS3 FIRST INSPECTER</span>
+    </h2>
+    <h3 class="movie-time">公開日 2020/3/27</h3>
+    <div class="movie-container">
+      <div class="hoge">
+        <iframe width="760" height="415" src="https://www.youtube.com/embed/-tdRyRQQBNw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="movie-data">
+      <h2 class="title-square">あらすじ</h2>
+      <p class="explanation">2120年、東京。シビュラシステムによって管理された社会で、刑事課一係を率いて事件を解決してきた二人の監視官、慎導灼と炯・ミハイル・イグナトフは、事件を捜査していく渦中で真実と正義を巡り決裂してしまう。
+        それらの事件の裏で暗躍する梓澤廣一は、ついに刑事課そのものを標的に定め、公安局ビルを襲撃する。
+        かつてない窮地に立たされた公安局刑事課一係。灼と炯の信義を問う、最後の事件が起きる――</p>
+      <p class="data">
+        2020年製作／135分／G／日本<br>
+        配給：東宝映像事業部
+      </p>
+      <a class="icon" href="https://psycho-pass.com/">オフィシャルサイト</a>
+    </div>
+    <div class="movie-staff">
+      <h2 class="title-square">Cast・Staff</h2>
+      <span class="staff">監督</span>
+      <br>
+      <p class="director">塩谷直義</p>
+      <br>
+      <span class="staff">キャスト</span>
+      <br>
+      <p class="cast">梶裕貴</p>
+      <p class="cast">中村悠一</p>
+      <p class="cast">櫻井孝宏</p>
+      <p class="cast">大塚明夫</p>
+      <p class="cast">諏訪部順一</p>
+      <p class="cast">関智一</p>
+      <p class="cast">花澤香菜 ...</p>
+    </div>
+    <br>
+    <div class="coment">
+      <div class="Review">
+        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
+      </div>
+    </div>
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>

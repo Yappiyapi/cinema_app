@@ -37,12 +37,17 @@ session_start();
           <?php if ($_SESSION['id']) : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+            <li class="nav-item">
+              <a href="new.php" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_in.php" class="nav-link">ログイン</a>
             </li>
@@ -53,10 +58,10 @@ session_start();
         </ul>
       </div>
     </nav>
-    <h2 class="movie-title1 text-center">
+    <h2 class="movie-title">
       <span>ハーレイ・クインの華麗なる覚醒 BIRDS OF PREY</span>
     </h2>
-    <h3 class="movie-time1">公開日 2020/3/20</h3>
+    <h3 class="movie-time">公開日 2020/3/20</h3>
     <div class="movie-container">
       <div class="hoge">
         <iframe width="760" height="415" src="https://www.youtube.com/embed/4pOqcoVcGtY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -88,6 +93,7 @@ session_start();
       <p class="cast">クリス・メッシーナ</p>
       <p class="cast">アリ・ウォン ...</p>
     </div>
+    <br>
     <div class="coment">
       <div class="Review">
         <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>

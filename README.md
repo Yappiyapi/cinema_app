@@ -183,3 +183,4 @@ INSERT INTO theater (movie_theater, created_at, updated_at) VALUES
 ('TOHOシネマズ 府中', now(), now()),
 ('イオンシネマ シアタス調布', now(), now()),
 ('109シネマズグランベリーパーク', now(), now());
+

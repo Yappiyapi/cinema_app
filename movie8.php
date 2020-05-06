@@ -37,12 +37,17 @@ session_start();
           <?php if ($_SESSION['id']) : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+            <li class="nav-item">
+              <a href="new.php" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_in.php" class="nav-link">ログイン</a>
             </li>
@@ -53,7 +58,56 @@ session_start();
         </ul>
       </div>
     </nav>
-
+    <h2 class="movie-title">
+      <span>スマホを落としただけのに 囚われの殺人鬼</span>
+    </h2>
+    <h3 class="movie-time">公開日 2020/2/21</h3>
+    <div class="movie-container">
+      <div class="hoge">
+        <iframe width="760" height="415" src="https://www.youtube.com/embed/YuHise5y6eI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="movie-data">
+      <h2 class="title-square">あらすじ</h2>
+      <p class="explanation">長い黒髪の女性ばかりを狙った、連続殺人事件。
+        事件を追っていた刑事の加賀谷（千葉雄大）が、連続殺人鬼の浦野（成田凌）を捕まえて事件は幕を閉じた。
+        と、誰もが思っていた――。
+        犯人を捕まえたにも関わらず、同じ殺人現場から次々と発見される、若い女性の遺体。
+        捜査が混迷を極める中、加賀谷は最後の手段として、囚われの殺人鬼·浦野への面会を申し込む。
+        「お前が、殺したのか……？」
+        刑務所で自由を奪われた浦野は、かつて自分にネット犯罪の全てを教えた、謎の人物「Ｍ」の存在を明かし、自分ならＭに近づくことができると加賀谷にささやく。
+        仕方なく浦野と手を組むことにした加賀谷だったが、恋人の美乃里（白石麻衣）が謎の男に狙われていることに気が付く。
+        なぜ犯人は美乃里を狙うのか。
+        これは模倣犯の仕業？ それとも浦野の犯行？
+        やがて事件は誰もが予想しない急展開を見せ、加賀谷は愛する者の命だけでなく、自分が抱えるヒミツまでもが危険に晒されてしまう。</p>
+      <p class="data">
+        2020年製作／118分／G／日本<br>
+        配給：東宝
+      </p>
+      <a class="icon" href="https://sumaho-otoshita.jp/">オフィシャルサイト</a>
+    </div>
+    <div class="movie-staff">
+      <h2 class="title-square">Cast・Staff</h2>
+      <span class="staff">監督</span>
+      <br>
+      <p class="director">中田秀夫</p>
+      <br>
+      <span class="staff">キャスト</span>
+      <br>
+      <p class="cast">千葉雄大</p>
+      <p class="cast">白石麻衣</p>
+      <p class="cast">鈴木拡樹</p>
+      <p class="cast">音尾琢真</p>
+      <p class="cast">江口のりこ</p>
+      <p class="cast">奈緒（本田なお）</p>
+      <p class="cast">飯尾和樹 ...</p>
+    </div>
+    <br>
+    <div class="coment">
+      <div class="Review">
+        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
+      </div>
+    </div>
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>

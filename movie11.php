@@ -37,12 +37,17 @@ session_start();
           <?php if ($_SESSION['id']) : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+            <li class="nav-item">
+              <a href="new.php" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_in.php" class="nav-link">ログイン</a>
             </li>
@@ -53,7 +58,46 @@ session_start();
         </ul>
       </div>
     </nav>
-
+    <h2 class="movie-title">
+      <span>劇場版 SHIROBAKO</span>
+    </h2>
+    <h3 class="movie-time">公開日 2020/2/29</h3>
+    <div class="movie-container">
+      <div class="hoge">
+        <iframe width="760" height="415" src="https://www.youtube.com/embed/P6Q1tz83SDI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="movie-data">
+      <h2 class="title-square">あらすじ</h2>
+      <p class="explanation">いつか必ず何としてでもアニメーション作品を一緒に作ろうと、ひょうたん屋のドーナツで誓いを立てた上山高校アニメーション同好会の5人。卒業後それぞれがそれぞれの場所でアニメーション制作に携わっていく。宮森あおいは「えくそだすっ！」「第三飛行少女隊」の制作を経て、少しずつ夢へ近づきつつ、徐々に自分の本当にやりたいことを考え始めていた。
+        あれから、4年。日々の仕事に葛藤しながら過ごしていたあおいは朝礼後、渡辺に呼ばれ新企画の劇場用アニメーションを任されることになる。しかし、この企画には思わぬ落とし穴があった。今の会社の状況で劇場用アニメーションを進行できるのか？不安がよぎるあおい・・・新たな仲間・宮井 楓やムサニメンバーと協力し、完成に向けて動き出す。果たして、劇場版の納品は間に合うのか――！？</p>
+      <p class="data">
+        2020年製作／119分／G／日本<br>
+        配給：ショウゲート
+      </p>
+      <a class="icon" href="http://shirobako-movie.com/">オフィシャルサイト</a>
+    </div>
+    <div class="movie-staff">
+      <h2 class="title-square">Cast・Staff</h2>
+      <span class="staff">監督</span>
+      <br>
+      <p class="director">水島努</p>
+      <br>
+      <span class="staff">キャスト</span>
+      <br>
+      <p class="cast">木村珠莉</p>
+      <p class="cast">佳村はるか</p>
+      <p class="cast">千菅春香</p>
+      <p class="cast">高野麻美</p>
+      <p class="cast">大和田仁美</p>
+      <p class="cast">佐倉綾音 ...</p>
+    </div>
+    <br>
+    <div class="coment">
+      <div class="Review">
+        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
+      </div>
+    </div>
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>

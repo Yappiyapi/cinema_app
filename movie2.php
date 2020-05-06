@@ -37,12 +37,17 @@ session_start();
           <?php if ($_SESSION['id']) : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+            <li class="nav-item">
+              <a href="new.php" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_in.php" class="nav-link">ログイン</a>
             </li>
@@ -53,7 +58,47 @@ session_start();
         </ul>
       </div>
     </nav>
-
+    <h2 class="movie-title">
+      <span>パラサイト 半地下の家族</span>
+    </h2>
+    <h3 class="movie-time">公開日 2020/1/10</h3>
+    <div class="movie-container">
+      <div class="hoge">
+        <iframe width="760" height="415" src="https://www.youtube.com/embed/VG9PjxVMd08" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="movie-data">
+      <h2 class="title-square">あらすじ</h2>
+      <p class="explanation">全員失業中で、その日暮らしの生活を送る貧しいキム一家。長男ギウは、ひょんなことからIT企業のCEOである超裕福なパク氏の家へ、家庭教師の面接を受けに行くことになる。そして、兄に続き、妹のギジョンも豪邸に足を踏み入れるが...この相反する2つの家族の出会いは、誰も観たことのない想像を超える悲喜劇へと猛烈に加速していく――。</p>
+      <p class="data">
+        2019年製作／132分／PG12／韓国<br>
+        原題：Parasite<br>
+        配給：ビターズ・エンド
+      </p>
+      <a class="icon" href="http://www.parasite-mv.jp/">オフィシャルサイト</a>
+    </div>
+    <div class="movie-staff">
+      <h2 class="title-square">Cast・Staff</h2>
+      <span class="staff">監督</span>
+      <br>
+      <p class="director">ポン・ジュノ</p>
+      <br>
+      <span class="staff">キャスト</span>
+      <br>
+      <p class="cast">ソン・ガンホ</p>
+      <p class="cast">イ・ソンギュン</p>
+      <p class="cast">チョ・ヨジョン</p>
+      <p class="cast">チェ・ウシク</p>
+      <p class="cast">パク・ソダム</p>
+      <p class="cast">チャン・ヘジン</p>
+      <p class="cast">パク・ミョンフン ...</p>
+    </div>
+    <br>
+    <div class="coment">
+      <div class="Review">
+        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
+      </div>
+    </div>
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>

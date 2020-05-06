@@ -103,13 +103,13 @@
   margin: auto;
   margin-top: 16px;
 }
-/*movie1.php部分*/
-.movie-title1 {
-  margin: 0 120px 0 0;
+/*movie.php部分*/
+.movie-title {
+  margin-left: 337px;
   font-size: 1.8rem;
 }
 
-.movie-time1 {
+.movie-time {
   font-size: 1.2rem;
   color: red;
   text-align: center;
@@ -183,4 +183,5 @@
   margin-left: 120px;
   border: 3px solid gray;
 }
+
 
