@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors[] = 'タイトルが未入力です';
   }
 
-  if ($genres_id == '') {
+  if ($category_id == '') {
     $errors[] = 'カテゴリーが未選択です';
   }
 
@@ -122,9 +122,9 @@ SQL;
                 <ul class="alert alert-danger">
                   <?php foreach ($errors as $error) : ?>
                     <li><?= $error ?></li>
-                  <?php endforeach; ?>
-                </ul>
-              <?php endif; ?>
+                    <?php endforeach; ?>
+                  </ul>
+                <?php endif; ?>
               <form action="new.php" method="post">
                 <div class="form-group">
                   <label for="title">タイトル</label>
@@ -142,6 +142,10 @@ SQL;
                 <div class="form-group">
                   <label for="body">本文</label>
                   <textarea name="body" id="" cols="30" rows="10" class="form-control" required></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="rating-star">評価</label>
+                  
                 </div>
                 <div class="form-group text-center">
                   <input type="submit" value="投稿" class="login-btn btn-lg">
