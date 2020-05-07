@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $body = $_POST['body'];
   $genres_id = $_POST['genres_id'];
   $user_id = $_SESSION['id'];
+  $rating_star = $_POST["rating_star"];
 
   $errors = [];
 
@@ -24,12 +25,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors[] = 'タイトルが未入力です';
   }
 
-  if ($category_id == '') {
+  if ($genres_id == '') {
     $errors[] = 'カテゴリーが未選択です';
   }
 
   if ($body == '') {
     $errors[] = '本文が未入力です';
+  }
+
+  if ($rating_star == '---') {
+    $errors[] = '評価が選択されていません';
   }
 
   if (empty($errors)) {
@@ -40,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   body,
   genres_id,
   user_id
+  -- rating_star
 )
 VALUES
 (
@@ -47,6 +53,7 @@ VALUES
   :body,
   :genres_id,
   :user_id
+  -- :rating_star
 )
 SQL;
     $stmt = $dbh->prepare($sql);
@@ -55,6 +62,7 @@ SQL;
     $stmt->bindParam(':body', $body, PDO::PARAM_STR);
     $stmt->bindParam(':genres_id', $genres_id, PDO::PARAM_INT);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+    // $stmt->bindParam(':rating_star', $rating_star, PDO::PARAM_INT);
 
     $stmt->execute();
 
@@ -63,14 +71,6 @@ SQL;
     exit;
   }
 }
-
-// return array(
-//   '1' => ['label' => '☆'],
-//   '2' => ['label' => '☆☆'],
-//   '3' => ['label' => '☆☆☆'],
-//   '4' => ['label' => '☆☆☆☆'],
-//   '5' => ['label' => '☆☆☆☆☆'],
-// );
 
 ?>
 
@@ -104,12 +104,14 @@ SQL;
           <?php if ($_SESSION['id']) : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_in.php" class="nav-link">ログイン</a>
             </li>
@@ -152,8 +154,9 @@ SQL;
                   <textarea name="body" id="" cols="30" rows="10" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">
-                  <label for="rating-star">評価</label>
-                  <select type="text" name="review">
+                  <label for="rating_star">評価</label>
+                  <select name="rating_star" class="star" required>
+                    <option value="---">---</option>
                     <option value="1">★</option>
                     <option value="2">★★</option>
                     <option value="3">★★★</option>
