@@ -44,16 +44,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   title,
   body,
   genres_id,
-  user_id
-  -- rating_star
+  user_id,
+  rating_star
 )
 VALUES
 (
   :title,
   :body,
   :genres_id,
-  :user_id
-  -- :rating_star
+  :user_id,
+  :rating_star
 )
 SQL;
     $stmt = $dbh->prepare($sql);
@@ -62,7 +62,7 @@ SQL;
     $stmt->bindParam(':body', $body, PDO::PARAM_STR);
     $stmt->bindParam(':genres_id', $genres_id, PDO::PARAM_INT);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-    // $stmt->bindParam(':rating_star', $rating_star, PDO::PARAM_INT);
+    $stmt->bindParam(':rating_star', $rating_star, PDO::PARAM_INT);
 
     $stmt->execute();
 

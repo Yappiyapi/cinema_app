@@ -32,6 +32,7 @@ $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
 $post = $stmt->fetch(PDO::FETCH_ASSOC);
+
 if (empty($post)) {
   header('Location: index.php');
   exit;
