@@ -6,16 +6,19 @@ require_once('functions.php');
 session_start();
 $dbh = connectDb();
 
-$sql = 'SELECT * FROM genres ORDER BY id';
+$title = $_GET['title'];
+
+$sql = 'SELECT * FROM movie WHERE title = :title';
 $stmt = $dbh->prepare($sql);
+$stmt->bindParam(':title', $title, PDO::PARAM_INT);
 $stmt->execute();
 
-$genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$movie = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $title = $_POST['title'];
   $body = $_POST['body'];
-  $genres_id = $_POST['genres_id'];
+  $movie_id = $_POST['movie_id'];
   $user_id = $_SESSION['id'];
   $rating_star = $_POST["rating_star"];
 
@@ -25,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors[] = 'タイトルが未入力です';
   }
 
-  if ($genres_id == '') {
+  if ($movie_id == '') {
     $errors[] = 'カテゴリーが未選択です';
   }
 
@@ -43,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   posts(
   title,
   body,
-  genres_id,
+  movie_id,
   user_id,
   rating_star
 )
@@ -51,7 +54,7 @@ VALUES
 (
   :title,
   :body,
-  :genres_id,
+  :movie_id,
   :user_id,
   :rating_star
 )
@@ -60,7 +63,7 @@ SQL;
 
     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
     $stmt->bindParam(':body', $body, PDO::PARAM_STR);
-    $stmt->bindParam(':genres_id', $genres_id, PDO::PARAM_INT);
+    $stmt->bindParam(':movie_id', $movie_id, PDO::PARAM_INT);
     $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
     $stmt->bindParam(':rating_star', $rating_star, PDO::PARAM_INT);
 
@@ -137,20 +140,15 @@ SQL;
               <?php endif; ?>
               <form action="new.php" method="post">
                 <div class="form-group">
-                  <label for="title">タイトル</label>
-                  <input type="text" class="form-control" required autofocus name="title">
+                  <label for="id">映画</label>
+                    <?= h($movie['title']) ?>
+                  <div class="form-group">
+                    <label for="title">レビュータイトル</label>
+                    <input type="text" class="form-control" required autofocus name="title">
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label for="genres_id">ジャンル</label>
-                  <select name="genres_id" class="form-control" required>
-                    <option value='' disabled selected>選択してください</option>
-                    <?php foreach ($genres as $g) : ?>
-                      <option value="<?= h($g['id']) ?>"><?= h($g['genre_name']) ?></option>
-                    <?php endforeach; ?>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label for="body">本文</label>
+                  <label for="body">レビュー内容</label>
                   <textarea name="body" id="" cols="30" rows="10" class="form-control" required></textarea>
                 </div>
                 <div class="form-group">

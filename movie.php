@@ -9,7 +9,7 @@ $dbh = connectDb();
 
 $id = $_GET['id'];
 
-$sql = 'select * from movie where id = :id';
+$sql = 'SELECT * FROM movie WHERE id = :id';
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
@@ -89,7 +89,7 @@ $movie = $stmt->fetch(PDO::FETCH_ASSOC);
       <h2 class="title-square">Cast・Staff</h2>
       <span class="staff">監督</span>
       <br>
-      <p class="director"><?= h($movie['director']) ?></p>
+      <p class="cast"><?= h($movie['director']) ?></p>
       <br>
       <span class="staff">キャスト</span>
       <br>
