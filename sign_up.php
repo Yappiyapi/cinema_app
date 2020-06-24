@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="login-container">
       <div class="row">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
           <div class="card card-signin my-5 bg-light">
@@ -142,8 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   <label for="password">Password</label>
                   <input type="password" class="form-control" required name="password">
                 </div>
-                <div class="form-group">
-                  <input type="submit" value="新規登録" class="btn btn-lg btn-primary btn-block ">
+                <div class="form-group text-center">
+                  <input type="submit" value="新規登録" class="login-btn btn-lg">
                 </div>
               </form>
             </div>

@@ -5,6 +5,11 @@ require_once('functions.php');
 
 session_start();
 
+$dbh = connectDb();
+
+$sql = 'select * from movie order by id';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
 ?>
 
 <!DOCTYPE html>
@@ -60,12 +65,12 @@ session_start();
       <img src="images/仮面病棟.jpg" alt="仮面病棟">
       <img src="images/ミッドサマー.jpg" alt="ミッドサマー">
       <img src="images/スマホ落とした2.jpg" alt="スマホを落としただけのに 囚われの殺人鬼">
-      <img src="images/akira imax.jpg" alt="AKIRA_IMAX">
+      <img src="images/ドクター・ドリトル2.jpg" alt="ドクター・ドリトル">
     </div>
     <h2 class="movies text-center">上映中の作品</h2>
     <div class="container">
       <div class="item">
-        <a href="movie1.php">
+        <a href="movie.php?id=1">
           <div class="item_jacket">
             <img src="images/ハーレイクイン.jpg" alt="ハーレイ・クインの華麗なる覚醒 BIRDS OF PREY" width="250" height="300">
           </div>
@@ -73,15 +78,7 @@ session_start();
         </a>
       </div>
       <div class="item">
-        <a href="movie2.php">
-          <div class="item_jacket">
-            <img src="images/パラサイト2.jpg" alt="パラサイト 半地下の家族" width="250" height="300">
-          </div>
-          <h5 class="item_title">パラサイト 半地下の家族</h5>
-        </a>
-      </div>
-      <div class="item">
-        <a href="movie3.php">
+        <a href="movie.php?id=2">
           <div class="item_jacket">
             <img src="images/一度死んでみた2.jpg" alt="一度死んでみた" width="250" height="300">
           </div>
@@ -89,23 +86,15 @@ session_start();
         </a>
       </div>
       <div class="item">
-        <a href="movie4.php">
+        <a href="movie.php?id=3">
           <div class="item_jacket">
-            <img src="images/fukushima50(2).jpg" alt="Fukushima 50" width="250" height="300">
+            <img src="images/パラサイト2.jpg" alt="パラサイト 半地下の家族" width="250" height="300">
           </div>
-          <h5 class="item_title">Fukushima 50</h5>
+          <h5 class="item_title">パラサイト 半地下の家族</h5>
         </a>
       </div>
       <div class="item">
-        <a href="movie5.php">
-          <div class="item_jacket">
-            <img src="images/ミッドサマー2.jpg" alt="ミッドサマー" width="250" height="300">
-          </div>
-          <h5 class="item_title">ミッドサマー</h5>
-        </a>
-      </div>
-      <div class="item">
-        <a href="movie6.php">
+        <a href="movie.php?id=4">
           <div class="item_jacket">
             <img src="images/仮面病棟2.jpg" alt="仮面病棟" width="250" height="300">
           </div>
@@ -113,15 +102,15 @@ session_start();
         </a>
       </div>
       <div class="item">
-        <a href="movie7.php">
+        <a href="movie.php?id=5">
           <div class="item_jacket">
-            <img src="images/AKIRA_imax2.jpg" alt="AKIRA IMAX" width="250" height="300">
+            <img src="images/ミッドサマー2.jpg" alt="ミッドサマー" width="250" height="300">
           </div>
-          <h5 class="item_title">AKIRA IMAX</h5>
+          <h5 class="item_title">ミッドサマー</h5>
         </a>
       </div>
       <div class="item">
-        <a href="movie8.php">
+        <a href="movie.php?id=6">
           <div class="item_jacket">
             <img src="images/スマホ落とした.jpg" alt="スマホを落としただけのに 囚われの殺人鬼" width="250" height="300">
           </div>
@@ -129,7 +118,23 @@ session_start();
         </a>
       </div>
       <div class="item">
-        <a href="movie9.php">
+        <a href="movie.php?id=7">
+          <div class="item_jacket">
+            <img src="images/ドクター・ドリトル.jpg" alt="ドクター・ドリトル" width="250" height="300">
+          </div>
+          <h5 class="item_title">ドクター・ドリトル</h5>
+        </a>
+      </div>
+      <div class="item">
+        <a href="movie.php?id=8">
+          <div class="item_jacket">
+            <img src="images/水曜日が消えた.jpg" alt="水曜日が消えた" width="250" height="300">
+          </div>
+          <h5 class="item_title">水曜日が消えた</h5>
+        </a>
+      </div>
+      <div class="item">
+        <a href="movie.php?id=9">
           <div class="item_jacket">
             <img src="images/PSYCHO-PASS3.jpg" alt="PSYCHO-PASS3 FIRST INSPECTER" width="250" height="300">
           </div>
@@ -137,7 +142,7 @@ session_start();
         </a>
       </div>
       <div class="item">
-        <a href="movie10.php">
+        <a href="movie.php?id=10">
           <div class="item_jacket">
             <img src="images/犬鳴村.jpg" alt="犬鳴村" width="250" height="300">
           </div>
@@ -145,7 +150,7 @@ session_start();
         </a>
       </div>
       <div class="item">
-        <a href="movie11.php">
+        <a href="movie.php?id=11">
           <div class="item_jacket">
             <img src="images/SHIROBAKO.jpg" alt="劇場版 SHIROBAKO" width="250" height="300">
           </div>
@@ -153,11 +158,11 @@ session_start();
         </a>
       </div>
       <div class="item">
-        <a href="movie12.php">
+        <a href="movie.php?id=12">
           <div class="item_jacket">
-            <img src="images/ジュディ.jpg" alt="ジュディ 虹の彼方に" width="250" height="300">
+            <img src="images/エジソンズ・ゲーム2.jpg" alt="エジソンズ・ゲーム" width="250" height="300">
           </div>
-          <h5 class="item_title">ジュディ 虹の彼方に</h5>
+          <h5 class="item_title">エジソンズ・ゲーム</h5>
         </a>
       </div>
     </div>

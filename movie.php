@@ -4,47 +4,18 @@ require_once('config.php');
 require_once('functions.php');
 
 session_start();
+
 $dbh = connectDb();
 
+$id = $_GET['id'];
 
-if ($_SESSION['id']) {
-  header('Location: index.php');
-  exit;
-}
+$sql = 'SELECT * FROM movie WHERE id = :id';
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->execute();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  $email = $_POST['email'];
-  $password = $_POST['password'];
 
-  $errors = [];
-
-  if ($email == '') {
-    $errors[] = 'emailが未入力です';
-  }
-
-  if ($password == '') {
-    $errors[] = 'passwordが未入力です';
-  }
-
-  if (empty($errors)) {
-
-    $sql = 'SELECT * FROM users WHERE email = :email';
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
-    $stmt->execute();
-
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (password_verify($password, $user['password'])) {
-      $_SESSION['id'] = $user['id'];
-      $url = $_SERVER['HTTP_REFERER'];
-      header('Location: ' . $url);
-      exit;
-    } else {
-      $errors[] = 'メールアドレスかパスワードが間違っています';
-    }
-  }
-}
+$movie = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -78,12 +49,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           <?php if ($_SESSION['id']) : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_out.php" class="nav-link">ログアウト</a>
+            </li>
+            <li class="nav-item">
+              <a href="new.php" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
               <a href="index.php" class="nav-link">HOME</a>
+            </li>
             <li class="nav-item">
               <a href="sign_in.php" class="nav-link">ログイン</a>
             </li>
@@ -94,35 +70,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </ul>
       </div>
     </nav>
-    <div class="login-container">
-      <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-          <div class="card card-signin my-5 bg-light">
-            <div class="card-body">
-              <h5 class="card-title text-center">Sign In</h5>
-              <?php if ($errors) : ?>
-                <ul class="alert alert-danger">
-                  <?php foreach ($errors as $error) : ?>
-                    <li><?php echo $error; ?></li>
-                  <?php endforeach; ?>
-                </ul>
-              <?php endif; ?>
-              <form class="form-signin" action="sign_in.php" method="post">
-                <div class="form-group">
-                  <label for="email">E-mail</label>
-                  <input type="email" class="form-control" required autofocus name="email">
-                </div>
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input type="password" class="form-control" required name="password">
-                </div>
-                <div class="form-group text-center">
-                  <input type="submit" value="ログイン" class="login-btn btn-lg">
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+    <h2 class="movie-title">
+      <p><?= h($movie['title']) ?></p>
+    </h2>
+    <h3 class="movie-time"><?= h($movie['screening_date']) ?></h3>
+    <div class="movie-container">
+      <div class="hoge">
+        <iframe width="760" height="415" src=<?= h($movie['trailer']) ?> frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    <div class="movie-data">
+      <h2 class="title-square">あらすじ</h2>
+      <p class="explanation"><?= h($movie['explanation']) ?></p>
+      <p class="data"><?= h($movie['production']) ?></p>
+      <a class="icon" href=<?= h($movie['website']) ?>>オフィシャルサイト</a>
+    </div>
+    <div class="movie-staff">
+      <h2 class="title-square">Cast・Staff</h2>
+      <span class="staff">監督</span>
+      <br>
+      <p class="cast"><?= h($movie['director']) ?></p>
+      <br>
+      <span class="staff">キャスト</span>
+      <br>
+      <p class="cast"><?= h($movie['casts1'])?></p>
+      <p class="cast"><?= h($movie['casts2'])?></p>
+      <p class="cast"><?= h($movie['casts3'])?></p>
+      <p class="cast"><?= h($movie['casts4'])?></p>
+      <p class="cast"><?= h($movie['casts5'])?>...</p>
+    </div>
+    <br>
+    <div class="coment">
+      <div class="Review">
+        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
       </div>
     </div>
     <footer class="footer font-small bg-light">
