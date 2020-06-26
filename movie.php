@@ -17,6 +17,38 @@ $stmt->execute();
 
 $movie = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// $id = $_GET['id'];
+// if (!is_numeric($id)) {
+//   header('Location: index.php');
+//   exit;
+// }
+
+
+$sql = <<<SQL
+SELECT
+  p.*,
+  m.title
+FROM
+  posts p
+LEFT JOIN
+  genres g
+ON
+  p.movie_id = m.id
+WHERE
+  p.id = :id
+SQL;
+
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->execute();
+
+$post = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// if (empty($post)) {
+//   header('Location: index.php');
+//   exit;
+// }
+
 ?>
 
 <!DOCTYPE html>
@@ -93,16 +125,35 @@ $movie = $stmt->fetch(PDO::FETCH_ASSOC);
       <br>
       <span class="staff">キャスト</span>
       <br>
-      <p class="cast"><?= h($movie['casts1'])?></p>
-      <p class="cast"><?= h($movie['casts2'])?></p>
-      <p class="cast"><?= h($movie['casts3'])?></p>
-      <p class="cast"><?= h($movie['casts4'])?></p>
-      <p class="cast"><?= h($movie['casts5'])?>...</p>
+      <p class="cast"><?= h($movie['casts1']) ?></p>
+      <p class="cast"><?= h($movie['casts2']) ?></p>
+      <p class="cast"><?= h($movie['casts3']) ?></p>
+      <p class="cast"><?= h($movie['casts4']) ?></p>
+      <p class="cast"><?= h($movie['casts5']) ?>...</p>
     </div>
     <br>
     <div class="coment">
       <div class="Review">
         <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
+        <div class="posts-container">
+          <div class="row">
+            <div class="col-md-11 col-lg-9 mx-auto mt-5">
+              <h2><?= h($post['title']) ?></h2>
+              <p>投稿日 : <?= h($post['created_at']) ?></p>
+              <p>カテゴリー : <?= h($post['movie_id']) ?></p>
+              <p>評価 : <?= h($post['rating_star']) ?></p>
+              <hr>
+              <p>
+                <?= nl2br(h($post['body'])) ?>
+              </p>
+              <!-- ログイン済 -->
+              <?php if (($_SESSION['id']) && ($_SESSION['id'] == $post['user_id'])) : ?>
+                <a href="edit.php?id=<?= h($post['id']) ?>" class="btn btn-secondary">編集</a>
+              <?php endif; ?>
+              <a href="index.php" class="btn btn-info">戻る</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <footer class="footer font-small bg-light">

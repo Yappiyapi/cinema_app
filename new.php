@@ -6,14 +6,13 @@ require_once('functions.php');
 session_start();
 $dbh = connectDb();
 
-$movie = $_GET['id'];
-
-$sql = 'SELECT * FROM movie order by id = :id';
+//movieテーブル映画タイトルレコードを取得
+$sql = 'SELECT * FROM movie order by id';
 $stmt = $dbh->prepare($sql);
-$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->bindParam(':id', $id, PDO::PARAM_STR);
 $stmt->execute();
 
-$movie = $stmt->fetch(PDO::FETCH_ASSOC);
+$movie = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $title = $_POST['title'];
@@ -70,7 +69,7 @@ SQL;
     $stmt->execute();
 
     $id = $dbh->lastInsertId();
-    header("Location: show.php?id={$id}");
+    header("Location: movie.php?id={$id}");
     exit;
   }
 }
@@ -144,7 +143,7 @@ SQL;
                   <select name="movie_id" class="form-control" required>
                     <option value='' disabled selected>選択してください</option>
                     <?php foreach ($movie as $m) : ?>
-                      <option value="<?= h($movie['id']) ?>"><?= h($movie['title']) ?></option>
+                      <option value="movie.php?movie_id=<?= h($m['id']) ?>"><?= h($m['title']) ?></option>
                     <?php endforeach; ?>
                   </select>
                 </div>
