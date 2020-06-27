@@ -8,6 +8,10 @@ session_start();
 $dbh = connectDb();
 
 $id = $_GET['id'];
+// if (!is_numeric($id)) {
+//   header('Location: index.php');
+//   exit;
+// }
 
 $sql = 'SELECT * FROM movie WHERE id = :id';
 $stmt = $dbh->prepare($sql);
@@ -16,12 +20,6 @@ $stmt->execute();
 
 
 $movie = $stmt->fetch(PDO::FETCH_ASSOC);
-
-// $id = $_GET['id'];
-// if (!is_numeric($id)) {
-//   header('Location: index.php');
-//   exit;
-// }
 
 
 $sql = <<<SQL
@@ -86,7 +84,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
             <li class="nav-item">
-              <a href="new.php" class="nav-link">New Post</a>
+              <a href="new.php?id=<?= h($post['id']) ?>" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
@@ -138,9 +136,10 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
         <div class="posts-container">
           <div class="row">
             <div class="col-md-11 col-lg-9 mx-auto mt-5">
+              <?= h($post['movie_id']) ?>
               <h2><?= h($post['title']) ?></h2>
               <p>投稿日 : <?= h($post['created_at']) ?></p>
-              <p>カテゴリー : <?= h($post['movie_id']) ?></p>
+              <p>レビュータイトル : <?= h($post['title']) ?></p>
               <p>評価 : <?= h($post['rating_star']) ?></p>
               <hr>
               <p>
