@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $title = $_POST['title'];
   $body = $_POST['body'];
   $movie_id = $_POST['movie_id'];
-  var_dump($movie_id);
   $user_id = $_SESSION['id'];
   $rating_star = $_POST["rating_star"];
 
