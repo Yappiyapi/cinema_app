@@ -9,13 +9,14 @@ $dbh = connectDb();
 $id = $_GET['id'];
 
 //movieテーブル映画タイトルレコードを取得
-$sql = 'SELECT * FROM movie order by id';
+$sql = 'SELECT * FROM movie where id';
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
 $movie = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+//投稿機能
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $title = $_POST['title'];
   $body = $_POST['body'];

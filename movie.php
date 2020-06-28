@@ -5,13 +5,15 @@ require_once('functions.php');
 
 session_start();
 
-$dbh = connectDb();
-
 $id = $_GET['id'];
+$posts_id = $_GET['posts_id'];
 // if (!is_numeric($id)) {
 //   header('Location: index.php');
 //   exit;
 // }
+
+
+$dbh = connectDb();
 
 $sql = 'SELECT * FROM movie WHERE id = :id';
 $stmt = $dbh->prepare($sql);
@@ -26,22 +28,30 @@ $sql = <<<SQL
 SELECT
   p.*,
   m.title
+  u.name as user_name
 FROM
   posts p
 LEFT JOIN
-  genres g
+  movie m
 ON
   p.movie_id = m.id
+LEFT JOIN
+  users u
+ON
+  p.user_id = u.id
 WHERE
   p.id = :id
+order by
+  p.created_at desc
 SQL;
 
 $stmt = $dbh->prepare($sql);
 $stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$post = $stmt->fetch(PDO::FETCH_ASSOC);
+$post = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// $postがみつからないときはindex.phpにとばす
 // if (empty($post)) {
 //   header('Location: index.php');
 //   exit;
@@ -66,6 +76,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+  <!-- ヘッダー -->
   <div class="flex-col-area">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 shadow">
       <a href="index.php" class="navbar-brand">
@@ -74,6 +85,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
           <img src="https://img.icons8.com/pastel-glyph/64/000000/movie-beginning.png" />
         </h2>
       </a>
+      <!-- ログイン・ログアウト・アカウント登録 -->
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
           <?php if ($_SESSION['id']) : ?>
@@ -84,7 +96,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
             <li class="nav-item">
-              <a href="new.php?id=<?= h($post['id']) ?>" class="nav-link">New Post</a>
+              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
@@ -100,6 +112,7 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
         </ul>
       </div>
     </nav>
+    <!-- 映画情報 -->
     <h2 class="movie-title">
       <p><?= h($movie['title']) ?></p>
     </h2>
@@ -130,13 +143,14 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
       <p class="cast"><?= h($movie['casts5']) ?>...</p>
     </div>
     <br>
+    <!-- レビュー機能 -->
     <div class="coment">
       <div class="Review">
         <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
         <div class="posts-container">
           <div class="row">
             <div class="col-md-11 col-lg-9 mx-auto mt-5">
-              <?= h($post['movie_id']) ?>
+              <?= h($post['id']) ?><?= h($post['movie_id']) ?>
               <h2><?= h($post['title']) ?></h2>
               <p>投稿日 : <?= h($post['created_at']) ?></p>
               <p>レビュータイトル : <?= h($post['title']) ?></p>
@@ -145,9 +159,10 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
               <p>
                 <?= nl2br(h($post['body'])) ?>
               </p>
-              <!-- ログイン済 -->
+              <!-- ログイン済の時 -->
               <?php if (($_SESSION['id']) && ($_SESSION['id'] == $post['user_id'])) : ?>
                 <a href="edit.php?id=<?= h($post['id']) ?>" class="btn btn-secondary">編集</a>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-delete">削除</button>
               <?php endif; ?>
               <a href="index.php" class="btn btn-info">戻る</a>
             </div>
@@ -155,10 +170,33 @@ $post = $stmt->fetch(PDO::FETCH_ASSOC);
         </div>
       </div>
     </div>
+    <!-- フッター -->
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>
   </div>
+  <!-- 削除 -->
+  <div class="modal fade" id="post-delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            「<?= h($post['title']) ?>」の記事を削除しますか？
+            </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        <div class="modal-body">
+          <p><?= nl2br(h($post['body'])) ?></p>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+          <a href="delete.php?id=<?= h($post['id']) ?>" class="btn btn-warning">削除</a>
+          </div>
+        </div>
+      </div>
+    </div>
 </body>
 
 </html>
