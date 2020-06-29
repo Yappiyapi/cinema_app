@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="edit-container">
       <div class="row">
         <div class="col-sm-11 col-md-9 col-lg-7 mx-auto">
           <div class="card my-5 bg-light">

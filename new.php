@@ -72,7 +72,7 @@ SQL;
     $stmt->execute();
 
     $id = $dbh->lastInsertId();
-    header("Location: movie.php?id={$id}");
+    header("Location: show.php?id={$id}");
     exit;
   }
 }
