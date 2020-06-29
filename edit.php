@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
-    header("Location: movie.php?id={$id}");
+    header("Location: show.php?id={$id}");
     exit;
   }
 }
@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
             <li class="nav-item">
-              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">New Post</a>
+              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">レビュー投稿</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   <input type="submit" value="更新" class="btn btn-lg btn-primary btn-block ">
                 </div>
               </form>
-              <a href="movie.php?id=<?= h($post['id']) ?>" class="btn btn-lg btn-info btn-block">戻る</a>
+              <a href="show.php?id=<?= h($post['id']) ?>" class="btn btn-lg btn-info btn-block">戻る</a>
             </div>
           </div>
         </div>

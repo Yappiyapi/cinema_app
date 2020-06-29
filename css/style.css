@@ -1,10 +1,12 @@
 @charset "utf-8";
 
+
 .flex-col-area {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
+
 
 .footer {
   margin-top: auto;
@@ -182,7 +184,6 @@
 }
 
 .Review h2{
-  display: inline-block;
   font-size: 1.7rem;
   line-height: 2;
   margin-left: 120px;
@@ -190,23 +191,21 @@
 }
 
 .star {
-  color: rgb(255, 238, 0);
+  color: rgb(228, 193, 17);
 }
 
 .form-group {
   margin-top: 20px;
 }
 
-.blog-title {
-  font-size: 22px;
-}
-
-.blog-title > a {
-  color: rgb(41, 163, 177);
-  font-size: 2.0rem;
-}
 
 .rate {
   color: rgb(214, 192, 24);
   font-size: 1.8rem;
+}
+
+.far {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #666;
 }

@@ -62,6 +62,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=IM+Fell+French+Canon+SC&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/0ac73359b5.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -85,7 +86,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
             <li class="nav-item">
-              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">New Post</a>
+              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">レビュー投稿</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
@@ -135,17 +136,26 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- レビュー機能 -->
     <div class="coment">
       <div class="Review">
-        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />新着レビュー</h2>
+        <h2>
+          <img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />新着レビュー
+        </h2>
+        </div>
         <div class="posts-container">
           <div class="row">
-            <div class="col-md-11 col-lg-9 mx-auto mt-5">
+            <div class="col-md-11 col-lg-9 mx-auto mt-4">
               <?php foreach ($posts as $post) : ?>
-                <h3 class="blog-title"><a href="show.php?id=<?= h($post['id']) ?>"><?= h($post['title']) ?></a></h3>
-                <p>投稿者：<?= h($post['user_name']) ?></p>
-                <p>投稿日 : <?= h($post['created_at']) ?></p>
-                <p>評価 : <span class=rate><?= str_repeat("★", h($post['rating_star'])) ?></p>
+                <h3 class="blog-title">
+                  <i class="far fa-comment-alt">
+                    <a href="show.php?id=<?= h($post['id']) ?>"><?= h($post['title']) ?></a>
+                  </i>
+                </h3>
+                <i class="far fa-user">：<?= h($post['user_name']) ?></i>
+                <br>
+                <i class="far fa-clock"> : <?= h($post['created_at']) ?></i>
+                <br>
+                <i class="far fa-thumbs-up"> : <span class=rate><?= str_repeat("★", h($post['rating_star'])) ?></i>
                 <p>
-                  <?= nl2br(h($post['body'])) ?>
+                  <?= h(mb_strimwidth($post['body'], 0, 50, "...")) ?>
                 </p>
                 <hr>
               <?php endforeach; ?>

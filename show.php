@@ -13,13 +13,11 @@ if (!is_numeric($id)) {
 
 $dbh = connectDb();
 
-// ヒアドキュメントを使用
-// <<<の後に指定した文字が出てくるまで文字列を入力することが可能。
-// 今回はSQLと指定したので、SQLという文字が出てくるまで文字列として扱う。
+
+// postsテーブルの全件データ取得
 $sql = <<<SQL
 SELECT
-  p.*,
-  m.title
+  p.*
 FROM
   posts p
 LEFT JOIN
@@ -75,7 +73,7 @@ if (empty($post)) {
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
             <li class="nav-item">
-              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">New Post</a>
+              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">レビュー投稿</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
@@ -102,12 +100,12 @@ if (empty($post)) {
           <p>
             <?= nl2br(h($post['body'])) ?>
           </p>
-          <!-- ログイン済で且つログインしているユーザーのidと記事を登録したユーザーのidが一致している場合 -->
+          <!-- ログイン済の時 -->
           <?php if (($_SESSION['id']) && ($_SESSION['id'] == $post['user_id'])) : ?>
             <a href="edit.php?id=<?= h($post['id']) ?>" class="btn btn-secondary">編集</a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-delete">削除</button>
           <?php endif; ?>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#post-delete">削除</button>
-          <a href="index.php" class="btn btn-info">戻る</a>
+          <a href="movie.php?id=<?= h($post['movie_id']) ?>" class="btn btn-info">戻る</a>
         </div>
       </div>
     </div>
