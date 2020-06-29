@@ -7,9 +7,12 @@ session_start();
 
 $dbh = connectDb();
 
-$sql = 'select * from movie order by id';
+$sql = 'SELECT * FROM movie WHERE id';
 $stmt = $dbh->prepare($sql);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
+
+$movie = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>

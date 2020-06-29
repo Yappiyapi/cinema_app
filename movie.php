@@ -5,9 +5,10 @@ require_once('functions.php');
 
 session_start();
 
-$dbh = connectDb();
-
 $id = $_GET['id'];
+
+
+$dbh = connectDb();
 
 $sql = 'SELECT * FROM movie WHERE id = :id';
 $stmt = $dbh->prepare($sql);
@@ -16,6 +17,34 @@ $stmt->execute();
 
 
 $movie = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+$sql = <<<SQL
+SELECT
+  p.*,
+  u.name as user_name
+FROM
+  posts p
+LEFT JOIN
+  movie m
+ON
+  p.movie_id = m.id
+LEFT JOIN
+  users u
+ON
+  p.user_id = u.id
+WHERE
+  m.id = :id
+order by
+  p.created_at desc
+SQL;
+
+$stmt = $dbh->prepare($sql);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
+$stmt->execute();
+
+$posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -36,6 +65,7 @@ $movie = $stmt->fetch(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+  <!-- ヘッダー -->
   <div class="flex-col-area">
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 shadow">
       <a href="index.php" class="navbar-brand">
@@ -44,6 +74,7 @@ $movie = $stmt->fetch(PDO::FETCH_ASSOC);
           <img src="https://img.icons8.com/pastel-glyph/64/000000/movie-beginning.png" />
         </h2>
       </a>
+      <!-- ログイン・ログアウト・アカウント登録 -->
       <div class="collapse navbar-collapse" id="navbarToggler">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
           <?php if ($_SESSION['id']) : ?>
@@ -54,7 +85,7 @@ $movie = $stmt->fetch(PDO::FETCH_ASSOC);
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
             <li class="nav-item">
-              <a href="new.php" class="nav-link">New Post</a>
+              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">New Post</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
@@ -70,6 +101,7 @@ $movie = $stmt->fetch(PDO::FETCH_ASSOC);
         </ul>
       </div>
     </nav>
+    <!-- 映画情報 -->
     <h2 class="movie-title">
       <p><?= h($movie['title']) ?></p>
     </h2>
@@ -93,18 +125,36 @@ $movie = $stmt->fetch(PDO::FETCH_ASSOC);
       <br>
       <span class="staff">キャスト</span>
       <br>
-      <p class="cast"><?= h($movie['casts1'])?></p>
-      <p class="cast"><?= h($movie['casts2'])?></p>
-      <p class="cast"><?= h($movie['casts3'])?></p>
-      <p class="cast"><?= h($movie['casts4'])?></p>
-      <p class="cast"><?= h($movie['casts5'])?>...</p>
+      <p class="cast"><?= h($movie['casts1']) ?></p>
+      <p class="cast"><?= h($movie['casts2']) ?></p>
+      <p class="cast"><?= h($movie['casts3']) ?></p>
+      <p class="cast"><?= h($movie['casts4']) ?></p>
+      <p class="cast"><?= h($movie['casts5']) ?>...</p>
     </div>
     <br>
+    <!-- レビュー機能 -->
     <div class="coment">
       <div class="Review">
-        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />映画レビュー</h2>
+        <h2><img src="https://img.icons8.com/material-two-tone/24/000000/movie-projector.png" />新着レビュー</h2>
+        <div class="posts-container">
+          <div class="row">
+            <div class="col-md-11 col-lg-9 mx-auto mt-5">
+              <?php foreach ($posts as $post) : ?>
+                <h3 class="blog-title"><a href="show.php?id=<?= h($post['id']) ?>"><?= h($post['title']) ?></a></h3>
+                <p>投稿者：<?= h($post['user_name']) ?></p>
+                <p>投稿日 : <?= h($post['created_at']) ?></p>
+                <p>評価 : <span class=rate><?= str_repeat("★", h($post['rating_star'])) ?></p>
+                <p>
+                  <?= nl2br(h($post['body'])) ?>
+                </p>
+                <hr>
+              <?php endforeach; ?>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <!-- フッター -->
     <footer class="footer font-small bg-light">
       <div class="footer-copyright text-center py-3 text-dark">&copy; 2020 Pelicula</div>
     </footer>

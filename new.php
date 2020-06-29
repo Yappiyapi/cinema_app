@@ -6,15 +6,17 @@ require_once('functions.php');
 session_start();
 $dbh = connectDb();
 
-$title = $_GET['title'];
+$id = $_GET['id'];
 
-$sql = 'SELECT * FROM movie WHERE title = :title';
+//movieテーブル映画タイトルレコードを取得
+$sql = 'SELECT * FROM movie where id';
 $stmt = $dbh->prepare($sql);
-$stmt->bindParam(':title', $title, PDO::PARAM_INT);
+$stmt->bindParam(':id', $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$movie = $stmt->fetch(PDO::FETCH_ASSOC);
+$movie = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+//投稿機能
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $title = $_POST['title'];
   $body = $_POST['body'];
@@ -140,12 +142,17 @@ SQL;
               <?php endif; ?>
               <form action="new.php" method="post">
                 <div class="form-group">
-                  <label for="id">映画</label>
-                    <?= h($movie['title']) ?>
-                  <div class="form-group">
-                    <label for="title">レビュータイトル</label>
-                    <input type="text" class="form-control" required autofocus name="title">
-                  </div>
+                  <label for="movie_id">作品名</label>
+                  <select name="movie_id" class="form-control" required>
+                    <option value='' disabled selected>選択してください</option>
+                    <?php foreach ($movie as $m) : ?>
+                      <option value="<?= h($m['id']) ?>"><?= h($m['title']) ?></option>
+                    <?php endforeach; ?>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="title">レビュータイトル</label>
+                  <input type="text" class="form-control" required autofocus name="title">
                 </div>
                 <div class="form-group">
                   <label for="body">レビュー内容</label>
