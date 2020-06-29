@@ -68,7 +68,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <body>
   <!-- ヘッダー -->
   <div class="flex-col-area">
-    <nav class="site-header navbar navbar-expand-lg navbar-light bg-light mb-5 shadow">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5 shadow">
       <a href="index.php" class="navbar-brand">
         <h2 class="font">
           Pelicula
@@ -86,7 +86,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
               <a href="sign_out.php" class="nav-link">ログアウト</a>
             </li>
             <li class="nav-item">
-              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">New Post</a>
+              <a href="new.php?id=<?= h($movie['id']) ?>" class="nav-link">レビュー投稿</a>
             </li>
           <?php else : ?>
             <li class="nav-item">
